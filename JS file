@@ -1,0 +1,69 @@
+// create angular app
+    var validationApp = angular.module('validationApp', []);
+
+    // create angular controller
+    validationApp.controller("mainController", function($scope) {
+
+        // function to submit the form after all validation has occurred            
+       
+            $scope.showButton=false;
+            $scope.index;
+            $scope.showPanel=false;
+            $scope.userDetail={};
+            // check to make sure the form is completely valid
+            $scope.formdatas = [
+                    { name:'Ashish',
+                        username: 'ash',
+                        email: 'ash@gmail.com'}
+                        
+                    ];
+
+        $scope.submitForm = function(){     
+            $scope.formdatas.push($scope.formdata);
+            $scope.formdata={};
+        };           
+        $scope.editList = function(i)
+        {
+             $scope.showButton=true;
+             $scope.index=i;
+            $scope.formdata.name=$scope.formdatas[i].name;
+            $scope.formdata.username=$scope.formdatas[i].username;
+            $scope.formdata.email=$scope.formdatas[i].email;
+        }
+        $scope.updateForm =function()
+        {
+             console.log($scope.index);
+             $scope.formdatas[$scope.index]=$scope.formdata;   
+             $scope.formdata={};
+             $scope.showButton =false;
+        }
+        $scope.login = function()
+        {
+            $scope.showPanel=true;
+        }
+        $scope.register= function()
+        {
+          $scope.showPanel=false;  
+        }
+        $scope.signIn = function(a,b)
+        {
+            var count =0;
+            for (var i =0; i<$scope.formdatas.length;i++)
+            {
+                var count = 0;
+                if($scope.formdatas[i].username == a && $scope.formdatas[i].email == b )
+                {
+                    window.alert("Successful Login");
+                    count =1;
+                    $scope.userDetail.name=a;
+                    $scope.userDetail.email=b;
+                    break;
+                }
+                          }
+            if(count != 1)
+            {
+                window.alert("UserName Incorrect");
+                $scope.showPanel=false;  
+            }
+        }
+    });
