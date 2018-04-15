@@ -1,0 +1,68 @@
+ <html>
+<head><script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+ <link rel='stylesheet' href='https://codepedia.info/wp-content/themes/themevicky/css/editor.css' type='text/css' />
+ </head>
+ <body  ng-app="myapp" ng-controller="tableController">
+ <strong><a target="_blank" href="https://codepedia.info/category/angularjs/" >Codepedia.info - AngularJs Tutorials</a></strong>
+  <br/><br/>
+  <input type="button" value="Fill Table Data" class='btn btn-success'  ng-click="fillTableData()" /> <br/><br/>
+ <table id="myTable" class="table table-stripe" >
+    <tr> <th>Srno</th> <th>Name</th> <th>DOB</th><th>Films</th></tr>
+   
+    <tr ng-repeat="a in Actor">
+        <td>{{ $index+1 }}</td>
+        <td>{{ a.Name }}</td>
+        <td>{{ a.Born }}</td>
+        <td>
+            <ul>
+              <li ng-repeat="f in a.filmography">{{f.name}} -({{f.year}}) </li>
+            </ul>
+        </td>
+    </tr>
+    </table>
+
+<script type="text/javascript">
+
+    var app = angular.module("myapp", []);
+    app.controller("tableController", ['$scope', function($scope) {
+
+      $scope.fillTableData=function(){
+          $scope.Actor = [{
+              Name: 'Robert Downey',
+              Born : 'April 4, 1965',
+              filmography: [ {name: 'Iron Man 2',year : '2010' }, 
+                             {name: 'Iron Man 3', year : '2013'  }, 
+                             {name: 'Avengers: Age of Ultron',year : '2015'}, 
+                             {name: 'Captain America: Civil War',year : '2016'}]
+              },{
+              Name: 'Vin Diesel',
+              Born : 'July 18, 1967',
+              filmography: [ {name: 'Fast & Furious',year : '2009'},
+                             {name: 'Fast Five',year : '2011'}, 
+                             {name: 'Riddick',year : '2013'}, 
+                             {name: 'Furious 7',year : '2015'}]
+              },{
+              Name: 'Sylvester Stallone',
+              Born : 'July 6, 1946',
+              filmography: [ {name: 'Rocky II',year : '1979'}, 
+                             {name: 'Rocky III',year : '1982'}, 
+                             {name: 'Rambo III',year : '1988'}, 
+                             {name: 'Escape Plan',year : '2013'}]
+                }];
+      };  
+
+    }]);
+    
+</script>
+ </body>
+</html>
+
+
+
+<style type="text/css">
+ .table {
+   max-width: 105%;
+    width: 93%;
+
+}
+</style> 
